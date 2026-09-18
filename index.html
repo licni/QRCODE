@@ -2104,7 +2104,7 @@
 }
 </style></head>
 <body>
-<style>.label-presets{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px}.label-presets button{border:1px solid #d6dfed;background:#f4f7fc;color:#315ac5;border-radius:6px;padding:7px 9px;font-size:14px}.bold-option{display:flex;gap:8px;align-items:center;margin-bottom:20px}.bold-option input{accent-color:#2451d1}</style>
+<style>.label-heading{display:flex;align-items:center;justify-content:space-between;gap:10px}.label-heading label{margin-bottom:10px}.clear-label{border:1px solid #d6dfed;background:#fff;color:#61738d;border-radius:6px;padding:4px 8px;font-size:12px;margin:0 0 10px}.label-presets{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px}.label-presets button{border:1px solid #d6dfed;background:#f4f7fc;color:#315ac5;border-radius:6px;padding:7px 9px;font-size:14px}.bold-option{display:flex;gap:8px;align-items:center;margin-bottom:20px}.bold-option input{accent-color:#2451d1}.margin-info{margin:10px 0 0;padding-top:10px;border-top:1px solid #dce5f2;font-size:12px;line-height:1.65;color:inherit}.margin-info strong{font-weight:700}</style>
 <main>
 <div class="workspace-heading"><div><p class="eyebrow">規設小祕密</p><h1 class="generator-title">QR code 產生器</h1></div><p>即時預覽 · 停止輸入 200 ms後檢查</p></div>
 <div class="workspace">
@@ -2115,13 +2115,13 @@
 </section>
 <section class="preview-panel" aria-labelledby="preview-title"><div class="preview-heading"><h3 id="preview-title">即時預覽</h3><span id="dimension-badge">400 × 400 px</span></div><div class="canvas-stage"><div class="paper"><canvas id="preview" width="400" height="400" aria-label="QR Code 預覽"></canvas><div id="empty-preview" hidden><span>▦</span><p>輸入內容開始製作</p></div></div></div>
 <div class="preview-meta"><span id="qr-info">—</span><label class="hide-label"><input id="hide-label" type="checkbox">暫時隱藏中央文字</label></div>
-<div class="status" id="status" data-state="waiting" role="status" aria-live="polite"><span class="status-icon" id="status-icon">◷</span><div><strong id="status-title">等待檢查</strong><p id="status-message">停止輸入 200 ms後開始驗證。</p><button class="suggestion-button" id="apply-suggestion" hidden>套用建議</button></div></div>
+<div class="status" id="status" data-state="waiting" role="status" aria-live="polite"><span class="status-icon" id="status-icon">◷</span><div><strong id="status-title">等待檢查</strong><p id="status-message">停止輸入 200 ms後開始驗證。</p><p class="margin-info" id="margin-info" hidden></p><button class="suggestion-button" id="apply-suggestion" hidden>套用建議</button></div></div>
 <div class="download-row"><button class="primary-button" id="download-png" disabled><span aria-hidden="true">↓</span> 下載 PNG</button><button class="secondary-button" id="download-svg" disabled>SVG</button><button class="secondary-button" id="download-dxf" disabled>DXF</button></div><p class="download-note">DXF 文字固定使用一般字重・寬 100 單位的 2D 填實向量圖塊・預覽 1:1 像素・列印後請再用手機試掃</p>
 </section>
 <section class="panel settings-panel" aria-labelledby="settings-title"><div class="panel-heading"><span class="step">02</span><h3 id="settings-title">外觀設定</h3><button class="text-button reset" id="reset-style">重設</button></div>
 <div class="setting-group"><div class="size-heading"><label for="size">QR 本體尺寸 <span class="unit">px</span></label><div class="size-presets"><button type="button" data-size-preset="120" title="將 QR 本體設為 120 px">工作單尺寸</button><button type="button" data-size-preset="400" title="將 QR 本體還原為 400 px">還原 400</button></div></div><div class="slider-row"><input id="size-range" type="range" min="21" max="1600" step="1" value="400" aria-label="QR 本體尺寸滑桿"><input id="size" class="numeric" type="number" min="21" max="1600" step="1" value="400"></div><p class="field-help">可設定 21–1600 px；尺寸只計算 QR 本體，輸出另加極窄白邊。過小可能無法辨識。</p></div>
 <div class="setting-group"><label for="ecc">起始容錯等級</label><select id="ecc"><option value="L">L · 最低（約 7%）</option><option value="M">M · 中等（約 15%）</option><option value="Q">Q · 較高（約 25%）</option><option value="H">H · 最高（約 30%）</option></select><p class="field-help">自動升降至通過檢查的容錯等級，但不低於你手動選擇的等級。</p><p class="field-help">驗證失敗時會自動向上調整，直到可讀或達到 H 級。</p></div>
-<div class="divider"></div><div class="setting-group"><label for="label-text">中央文字 <span class="optional">選填</span></label><textarea id="label-text" rows="3" maxlength="120" placeholder="例如：集合地點" autocomplete="off"></textarea><div class="label-presets" role="group" aria-label="中央文字快捷選擇"><button type="button" data-label-preset="施工位置">施工位置</button><button type="button" data-label-preset="交接箱位置">交接箱位置</button></div><p class="field-help">接近可用邊界才換行；可在預覽中直接拖曳位置。</p></div>
+<div class="divider"></div><div class="setting-group"><div class="label-heading"><label for="label-text">中央文字 <span class="optional">選填</span></label><button type="button" class="clear-label" id="clear-label">清空</button></div><textarea id="label-text" rows="3" maxlength="120" placeholder="例如：集合地點" autocomplete="off"></textarea><div class="label-presets" role="group" aria-label="中央文字快捷選擇"><button type="button" data-label-preset="施工位置">施工位置</button><button type="button" data-label-preset="交接箱位置">交接箱位置</button></div><p class="field-help">接近可用邊界才換行；可在預覽中直接拖曳位置。</p></div>
 <div class="setting-group"><label for="font-size">文字大小 <span class="unit">px</span></label><div class="slider-row"><input id="font-range" type="range" min="8" max="120" value="50" aria-label="文字大小滑桿"><input id="font-size" class="numeric" type="number" min="8" max="120" value="50"></div></div>
 <label class="bold-option"><input type="checkbox" id="text-bold" checked> 特黑粗體（Noto Sans TC）</label>
 <div class="color-row"><label for="text-color">文字顏色</label><div class="color-control"><input id="text-color" type="color" value="#000000"><span id="color-value">#000000</span></div></div>
@@ -2175,9 +2175,133 @@ const $=id=>document.getElementById(id),levels=['L','M','Q','H'];let revision=0,
 let qrFontState='loading';
 const pending=new Map();let decoder=null;try{decoder=createInlineWorker();decoder.onmessage=e=>{const job=pending.get(e.data.id);if(job){clearTimeout(job.timeout);pending.delete(e.data.id);e.data.error?job.reject(new Error(e.data.error)):job.resolve(e.data.passed);}};decoder.onerror=()=>{for(const job of pending.values()){clearTimeout(job.timeout);job.reject(new Error('辨識器載入失敗，請重新整理後再試。'));}pending.clear();decoder.terminate();decoder=null;};}catch{}
 const makeCanvas=(w,h)=>Object.assign(document.createElement('canvas'),{width:w,height:h}),config=()=>({size:Number($('size').value),ecc:$('ecc').value,label:$('label-text').value,fontSize:Number($('font-size').value),outline:Number($('outline').value),color:$('text-color').value,bold:$('text-bold').checked,hidden:$('hide-label').checked,labelX:labelPosition.x,labelY:labelPosition.y});
-function setStatus(state,title,message,action){$('status').dataset.state=state;$('status-title').textContent=title;$('status-message').textContent=message;$('status-icon').textContent=state==='pass'?'✓':(state==='fail'||state==='error'?'!':'◷');suggestion=action||null;$('apply-suggestion').hidden=!suggestion;$('apply-suggestion').textContent=action?.text||'套用建議';}function lock(){validRevision=-1;$('download-png').disabled=true;$('download-svg').disabled=true;$('download-dxf').disabled=true;}function validSettings(s){return Number.isInteger(s.size)&&s.size>=21&&s.size<=1600&&Number.isFinite(s.fontSize)&&s.fontSize>=8&&s.fontSize<=Math.max(8,Math.round(s.size*.3))&&Number.isFinite(s.outline)&&s.outline>=.5&&s.outline<=Math.max(.5,Math.round(s.size*.02*10)/10);}
+function setStatus(state,title,message,action){$('status').dataset.state=state;$('status-title').textContent=title;$('status-message').textContent=message;$('status-icon').textContent=state==='pass'?'✓':(state==='fail'||state==='error'?'!':'◷');suggestion=action||null;$('apply-suggestion').hidden=!suggestion;$('apply-suggestion').textContent=action?.text||'套用建議';}function setMargin(text=''){$('margin-info').hidden=!text;$('margin-info').innerHTML=text;}function lock(){validRevision=-1;$('download-png').disabled=true;$('download-svg').disabled=true;$('download-dxf').disabled=true;setMargin();}function validSettings(s){return Number.isInteger(s.size)&&s.size>=21&&s.size<=1600&&Number.isFinite(s.fontSize)&&s.fontSize>=8&&s.fontSize<=Math.max(8,Math.round(s.size*.3))&&Number.isFinite(s.outline)&&s.outline>=.5&&s.outline<=Math.max(.5,Math.round(s.size*.02*10)/10);}
 function update(){if(composing)return;if(qrFontState!=='ready'){clearTimeout(timer);revision++;lock();setStatus(qrFontState==='loading'?'waiting':'error',qrFontState==='loading'?'正在載入內嵌字體':'字體載入失敗',qrFontState==='loading'?'字體就緒後會自動更新預覽，不需連到外部字型服務。':'請重新開啟檔案，或使用新版 Chrome／Edge。');return;}const token=++revision;clearTimeout(timer);lock();current=null;$('char-count').textContent=Array.from($('payload').value).length+' 字';$('color-value').textContent=$('text-color').value.toUpperCase();$('dimension-badge').textContent=`本體 ${$('size').value||'—'} × ${$('size').value||'—'} px`;$('encoded-content').textContent='—';try{let s=config();if(!validSettings(s))throw new Error('請輸入有效尺寸與字級，並遵守欄位顯示的範圍。');const payload=$('payload').value;if(!payload){$('preview').hidden=true;$('empty-preview').hidden=false;$('empty-preview').querySelector('p').textContent='輸入內容開始製作';$('qr-info').textContent='尚無內容';setStatus('waiting','等待輸入','輸入後會即時預覽，停止輸入 200 ms後自動檢查。');return;}$('encoded-content').textContent=payload;let result=QRRenderer.render(QRCode,makeCanvas,payload,s);if(result.labelBlocked){labelPosition={...lastValidLabelPosition};s={...s,labelX:labelPosition.x,labelY:labelPosition.y};result=QRRenderer.render(QRCode,makeCanvas,payload,s);}else if(s.label&&!s.hidden)lastValidLabelPosition={...labelPosition};const preview=$('preview');preview.width=result.outputSize;preview.height=result.outputSize;preview.parentElement.style.width=result.outputSize+'px';preview.parentElement.style.height=result.outputSize+'px';preview.getContext('2d').drawImage(result.canvas,0,0);preview.hidden=false;$('empty-preview').hidden=true;preview.classList.toggle('label-draggable',Boolean(s.label&&!s.hidden));current={result,payload,settings:s};$('qr-info').textContent=`${s.ecc} 級 · ${result.modules} × ${result.modules} 格 · 輸出 ${result.outputSize} px`;setStatus('waiting','等待檢查',autoReason||'停止輸入 200 ms後，僅檢查原始解析度的圖片。');if(dragging)setStatus('waiting','調整文字位置中','放開滑鼠後檢查最終位置。');else timer=setTimeout(()=>verify(token,current),200);}catch(error){$('preview').hidden=true;$('empty-preview').hidden=false;$('empty-preview').querySelector('p').textContent='請調整輸入內容';$('qr-info').textContent='—';setStatus('error','尚未產生 QR',error.message);}}
-function decode(result,payload){if(result.overflow)return Promise.resolve(false);if(!decoder)return Promise.reject(new Error('辨識器尚未就緒，請重新整理後再試。'));const source=result.canvas;const images=[source].map(canvas=>({width:canvas.width,height:canvas.height,data:canvas.getContext('2d').getImageData(0,0,canvas.width,canvas.height).data.buffer}));return new Promise((resolve,reject)=>{const id=++jobId,timeout=setTimeout(()=>{pending.delete(id);reject(new Error('檢查時間過長，請縮短內容或降低輸出尺寸後再試。'));},15000);pending.set(id,{resolve,reject,timeout});decoder.postMessage({id,images,payload},images.map(i=>i.data));});}async function trial(snapshot,settings){try{return await decode(QRRenderer.render(QRCode,makeCanvas,snapshot.payload,settings),snapshot.payload);}catch(error){if(/capacity|amount of data|big to be stored/i.test(error.message))return false;throw error;}}
+function decodeCanvases(canvases,payload){if(!decoder)return Promise.reject(new Error('辨識器尚未就緒，請重新整理後再試。'));const images=canvases.map(canvas=>({width:canvas.width,height:canvas.height,data:canvas.getContext('2d').getImageData(0,0,canvas.width,canvas.height).data.buffer}));return new Promise((resolve,reject)=>{const id=++jobId,timeout=setTimeout(()=>{pending.delete(id);reject(new Error('檢查時間過長，請縮短內容或降低輸出尺寸後再試。'));},15000);pending.set(id,{resolve,reject,timeout});decoder.postMessage({id,images,payload},images.map(i=>i.data));});}function decode(result,payload){return result.overflow?Promise.resolve(false):decodeCanvases([result.canvas],payload);}async function trial(snapshot,settings){try{return await decode(QRRenderer.render(QRCode,makeCanvas,snapshot.payload,settings),snapshot.payload);}catch(error){if(/capacity|amount of data|big to be stored/i.test(error.message))return false;throw error;}}
+// The exact rounded grid is shared by drawing, hit tests and margin sampling.
+function moduleEdges(result){return Array.from({length:result.modules+1},(_,i)=>result.quiet+Math.round(i*result.qrSize/result.modules));}
+function labelCells(result){
+ const b=result.snapBounds||result.labelBounds;if(!b)return null;
+ const edges=moduleEdges(result),n=result.modules,eps=1e-6;
+ if(b.left<edges[0]-eps||b.top<edges[0]-eps||b.left+b.width>edges[n]+eps||b.top+b.height>edges[n]+eps)return null;
+ const span=(start,length)=>{let first=0,last=n;while(first<n&&edges[first+1]<=start+eps)first++;while(last>0&&edges[last-1]>=start+length-eps)last--;return [first,last];};
+ const [x0,x1]=span(b.left,b.width),[y0,y1]=span(b.top,b.height);
+ return x0<x1&&y0<y1?{x0,x1,y0,y1,edges}:null;
+}
+function marginPlan(result,k){
+ const b=labelCells(result);if(!b)return {complete:false,reason:'boundary',areas:[]};
+ const {x0,x1,y0,y1,edges}=b,n=result.modules;
+ const areas=[{x:Math.floor((x0+x1-k)/2),y:y0-k},{x:Math.floor((x0+x1-k)/2),y:y1},{x:x0-k,y:Math.floor((y0+y1-k)/2)},{x:x1,y:Math.floor((y0+y1-k)/2)}];
+ if(areas.some(a=>a.x<0||a.y<0||a.x+k>n||a.y+k>n))return {complete:false,reason:'boundary',areas:[]};
+ // A partial set must never receive the same score as all four directions.
+ if(areas.some(a=>[[0,0],[n-8,0],[0,n-8]].some(([x,y])=>a.x<x+8&&a.x+k>x&&a.y<y+8&&a.y+k>y)))return {complete:false,reason:'finder',areas:[]};
+ return {complete:true,areas,edges};
+}
+function damageMarginCanvases(result,k){
+ const plan=marginPlan(result,k);if(!plan.complete)return [];
+ return plan.areas.map(a=>{const canvas=makeCanvas(result.outputSize,result.outputSize),ctx=canvas.getContext('2d'),e=plan.edges;ctx.drawImage(result.canvas,0,0);ctx.fillStyle='#fff';ctx.fillRect(e[a.x],e[a.y],e[a.x+k]-e[a.x],e[a.y+k]-e[a.y]);return canvas;});
+}
+async function measureMargin(token,snapshot,maxSize=8){
+ const {result,settings,payload}=snapshot;
+ snapshot.marginReport=null;if(!settings.label.trim()||settings.hidden)return null;
+ for(let k=1;k<=maxSize;k++){
+   if(token!==revision)return null;
+   const plan=marginPlan(result,k);
+   if(!plan.complete){snapshot.marginReport={reason:plan.reason,at:k};return k-1;}
+   const passed=await decodeCanvases(damageMarginCanvases(result,k),payload);
+   if(token!==revision)return null;
+   if(!passed){snapshot.marginReport={reason:'failure',at:k};return k-1;}
+ }
+ snapshot.marginReport={reason:'limit',at:maxSize};return maxSize;
+}
+function describeMargin(snapshot){
+ if(!Number.isInteger(snapshot.margin))return '';
+ const m=snapshot.margin,r=snapshot.marginReport;
+ const passed=m>0?`已完整通過 1 × 1${m>1?' 至 '+m+' × '+m:''} 格測試。`:'尚未通過完整的 1 × 1 格測試。';
+ const reason=r?.reason==='failure'?`${r.at} × ${r.at} 的四方向中有位置辨識失敗。`:r?.reason==='boundary'?`文字靠近邊界，${r.at} × ${r.at} 無法完成四方向測試；不是已證實辨識失敗。`:r?.reason==='finder'?`${r.at} × ${r.at} 測試方塊會碰到角落定位區，未作完整測試；不是已證實辨識失敗。`:`已測至 ${m} × ${m} 上限。`;
+ return `<strong>文字周圍實測：</strong>${passed}${reason} 每一尺寸均測上、下、左、右各一處塗白；此為目前位置的局部抽測，不是任意損壞的保證。`;
+}
+// Nearby search retains every grid-aligned candidate, plus fine pixel offsets.
+const marginActions=document.createElement('div');
+marginActions.innerHTML='<button type="button" class="suggestion-button" id="best-position" hidden>尋找最佳文字位置</button> <button type="button" class="suggestion-button" id="raise-ecc" hidden>提高容錯率</button> <button type="button" class="suggestion-button" id="cancel-position" hidden>停止搜尋</button>';
+$('margin-info').after(marginActions);
+let positionSearch=null;
+function showEccUpgrade(show,ecc=current?.settings.ecc){
+ const button=$('raise-ecc'),index=levels.indexOf(ecc);
+ button.hidden=!show||index<0;button.disabled=index<0||index===levels.length-1;
+ button.textContent=index===levels.length-1?'已達最高容錯 H 級':index>=0?`提高容錯率（${ecc} → ${levels[index+1]}）`:'提高容錯率';
+ button.title=index===levels.length-1?'已達最高等級，請縮小文字或調整位置。':'只提高一級，隨後重新檢查。';
+}
+function showMarginActions(margin){const low=Number.isInteger(margin)&&margin<2;$('best-position').hidden=!low;$('best-position').disabled=false;showEccUpgrade(low);}
+const baseLock=lock;lock=function(){baseLock();showMarginActions(null);positionSearch=null;$('cancel-position').hidden=true;};
+function lockDownloads(){validRevision=-1;for(const id of ['download-png','download-svg','download-dxf'])$(id).disabled=true;}
+function acceptSnapshot(token,snapshot){
+ if(token!==revision)return;
+ current=snapshot;labelPosition={x:snapshot.settings.labelX||0,y:snapshot.settings.labelY||0};lastValidLabelPosition={...labelPosition};
+ $('ecc').value=snapshot.settings.ecc;
+ const preview=$('preview'),r=snapshot.result;preview.width=preview.height=r.outputSize;
+ preview.parentElement.style.width=preview.parentElement.style.height=r.outputSize+'px';preview.getContext('2d').drawImage(r.canvas,0,0);
+ $('qr-info').textContent=`${snapshot.settings.ecc} 級 · ${r.modules} × ${r.modules} 格 · 輸出 ${r.outputSize} px`;
+ validRevision=token;for(const id of ['download-png','download-svg','download-dxf'])$(id).disabled=false;
+ setMargin(describeMargin(snapshot));showMarginActions(snapshot.margin);
+}
+function optimizationPositions(snapshot,quick=false){
+ const {result,settings}=snapshot,b=result.snapBounds||result.labelBounds;if(!b)return [];
+ const ox=settings.labelX||0,oy=settings.labelY||0,step=result.moduleSize,edges=moduleEdges(result),points=new Map(),radius=quick?1:4.5*step;
+ const add=(x,y)=>{
+   if(Math.abs(x-ox)>radius+1e-6||Math.abs(y-oy)>radius+1e-6||Math.hypot(x-ox,y-oy)<1e-6)return;
+   const l=b.left+x-ox,t=b.top+y-oy,r=l+b.width,bt=t+b.height,n=result.modules;
+   if(l<edges[0]-1e-6||t<edges[0]-1e-6||r>edges[n]+1e-6||bt>edges[n]+1e-6)return;
+   if([[0,0],[n-8,0],[0,n-8]].some(([fx,fy])=>l<edges[fx+8]&&r>edges[fx]&&t<edges[fy+8]&&bt>edges[fy]))return;
+   points.set(x.toFixed(6)+','+y.toFixed(6),{x,y,distance:Math.hypot(x-ox,y-oy)});
+ };
+ for(let y=-1;y<=1;y+=.5)for(let x=-1;x<=1;x+=.5)add(ox+x,oy+y);
+ const range=quick?0:4;
+ for(let dy=-range;dy<=range;dy++)for(let dx=-range;dx<=range;dx++){
+   for(const p of nearbyPositions(result,settings,{x:ox+dx*step,y:oy+dy*step}))add(p.x,p.y);
+ }
+ return [...points.values()].sort((a,b)=>a.distance-b.distance||a.y-b.y||a.x-b.x);
+}
+async function searchLocalPosition(token,snapshot,quick=false){
+ const positions=optimizationPositions(snapshot,quick);let best=snapshot,tested=0;
+ for(const p of positions){
+   if(token!==revision)return null;
+   setStatus('checking',quick?'正在同級微調文字':'正在尋找較佳文字位置',`維持 ${snapshot.settings.ecc} 級；測試 ${++tested}/${positions.length}。找到完整通過 2 × 2 的位置即停止，避免長時間搜尋。`);
+   const settings={...snapshot.settings,labelX:p.x,labelY:p.y},result=QRRenderer.render(QRCode,makeCanvas,snapshot.payload,settings);
+   if(result.labelBlocked||result.overflow||!await decode(result,snapshot.payload))continue;
+   if(token!==revision)return null;
+   const candidate={result,settings,payload:snapshot.payload};candidate.margin=await measureMargin(token,candidate,2);
+   if(token!==revision)return null;
+   if(candidate.margin>best.margin)best=candidate;
+   if(best.margin>=2)break;
+ }
+ if(token!==revision)return null;
+ if(best!==snapshot){best.margin=await measureMargin(token,best);if(token!==revision)return null;}
+ return {best,tested,total:positions.length};
+}
+$('best-position').addEventListener('click',async()=>{
+ if(validRevision!==revision||!current||!Number.isInteger(current.margin)||current.margin>=2)return;
+ const snapshot=current,token=++revision;clearTimeout(timer);showMarginActions(null);lockDownloads();positionSearch={snapshot,token};$('cancel-position').hidden=false;
+ try{
+   const found=await searchLocalPosition(token,snapshot);if(token!==revision||!found)return;
+   const best=found.best;acceptSnapshot(token,best);
+   const improved=best.margin>snapshot.margin;
+   setStatus(best.margin<2?'fail':'pass',best.margin>=2?'已找到通過 2 × 2 的位置':improved?'已套用較佳文字位置':'本次附近搜尋未找到改善',`已測試附近 ${found.tested}/${found.total} 個候選，容錯維持 ${best.settings.ecc} 級。${best.margin<2?'未取得完整 2 × 2 通過結果；不代表其他位置一定無解。':'未繼續搜尋全圖或宣稱全域最佳。'}`);
+   if(best.margin<2&&best.settings.ecc==='H')$('status-message').textContent+=' 已達 H 級上限，請縮小文字。';
+ }catch(error){if(token===revision){acceptSnapshot(token,snapshot);setStatus('error','位置搜尋未完成',error.message+' 原位置保留。');}}
+ finally{if(token===revision){positionSearch=null;$('cancel-position').hidden=true;}}
+});
+$('cancel-position').addEventListener('click',()=>{
+ if(!positionSearch||positionSearch.token!==revision)return;
+ const snapshot=positionSearch.snapshot;positionSearch=null;revision++;$('cancel-position').hidden=true;acceptSnapshot(revision,snapshot);
+ setStatus('waiting','已停止搜尋','保留原位置與已完成的局部測試結果，未套用未完成的搜尋。');
+});
+$('raise-ecc').addEventListener('click',()=>{
+ if(!current||$('raise-ecc').hidden||$('raise-ecc').disabled)return;const index=levels.indexOf(current.settings.ecc);if(index<0||index>=3)return;
+ $('raise-ecc').disabled=true;
+ manualEcc=levels[index+1];$('ecc').value=manualEcc;update();clearTimeout(timer);
+ if(current)verify(revision,current,true);
+});
 function nearbyPositions(result,settings,anchor={x:settings.labelX||0,y:settings.labelY||0}){
  const b=result.snapBounds||result.labelBounds;if(!b)return [];
  const step=result.moduleSize,edge=i=>result.quiet+Math.round(i*result.qrSize/result.modules);
@@ -2213,25 +2337,24 @@ async function findPlacement(token,snapshot,settings){
  }
  return null;
 }
-async function verify(token,snapshot){if(token!==revision||!snapshot)return;setStatus('checking','正在檢查','以原始解析度辨識 QR，核對讀出的內容。');try{
+async function verify(token,snapshot,singleLevel=false){if(token!==revision||!snapshot)return;setStatus('checking','正在檢查','以原始解析度辨識 QR，核對讀出的內容。');try{
 const original=snapshot.settings;
-for(let i=levels.indexOf(manualEcc);i<levels.length;i++){
+for(let i=levels.indexOf(singleLevel?original.ecc:manualEcc);i<(singleLevel?levels.indexOf(original.ecc)+1:levels.length);i++){
  const match=await findPlacement(token,snapshot,{...original,ecc:levels[i]});
  if(token!==revision)return;
  if(!match)continue;
- const moved=match.labelX!==original.labelX||match.labelY!==original.labelY;
- if(match.ecc!==original.ecc||moved){
-   labelPosition={x:match.labelX||0,y:match.labelY||0};lastValidLabelPosition={...labelPosition};
-   $('ecc').value=match.ecc;
-   const result=QRRenderer.render(QRCode,makeCanvas,snapshot.payload,match);
-   current={result,payload:snapshot.payload,settings:match};
-   const preview=$('preview');preview.width=result.outputSize;preview.height=result.outputSize;preview.getContext('2d').drawImage(result.canvas,0,0);
-   $('qr-info').textContent=match.ecc+' 級 · '+result.modules+' × '+result.modules+' 格 · 輸出 '+result.outputSize+' px';
+ let checked={result:QRRenderer.render(QRCode,makeCanvas,snapshot.payload,match),payload:snapshot.payload,settings:match};
+ checked.margin=await measureMargin(token,checked);if(token!==revision)return;
+ if(Number.isInteger(checked.margin)&&checked.margin<2){
+   const found=await searchLocalPosition(token,checked,true);if(token!==revision||!found)return;checked=found.best;
  }
- validRevision=token;for(const id of ['download-png','download-svg','download-dxf'])$(id).disabled=false;
- autoReason='';setStatus('pass','通過自動辨識檢查',(moved?'已微調文字位置；':'')+(match.ecc!==original.ecc?'容錯已調整為 '+match.ecc+' 級；':'')+'原始解析度已讀出正確內容。實際列印後請再用手機試掃。');return;
+ const moved=checked.settings.labelX!==original.labelX||checked.settings.labelY!==original.labelY;
+ acceptSnapshot(token,checked);autoReason='';
+ const low=Number.isInteger(checked.margin)&&checked.margin<2,limited=['boundary','finder'].includes(checked.marginReport?.reason);
+ setStatus(low?'fail':'pass',low?(limited?'原圖可讀，局部測試受限':'原圖可讀，局部餘裕不足 2 × 2'):'通過自動辨識檢查',(moved?'已同級微調文字位置；':'')+(match.ecc!==original.ecc?'原圖辨識所需容錯已調整為 '+match.ecc+' 級；':'')+(low?'已做 ±1 px 局部微調；可按「尋找最佳文字位置」擴大附近搜尋，不會改變容錯。':'原始解析度已讀出正確內容。實際列印後請再用手機試掃。'));return;
 }
 const s=original;
+if(singleLevel){setStatus('fail','此級尚未通過辨識','本次只提高一級，未繼續自動升級。可縮小文字，或再按提高容錯率。');showEccUpgrade(true,s.ecc);if(s.ecc==='H')$('status-message').textContent+=' 已達 H 級上限。';lockDownloads();return;}
 if(!s.label||s.hidden){setStatus('fail','目前無法穩定辨識','請增加 QR 尺寸或縮短掃描內容。');return;}
 const minFont=Math.max(8,Math.round(s.size*.025)),step=Math.max(1,Math.ceil(s.fontSize*.07));let candidate=null;for(let font=Math.floor(s.fontSize-step);font>=minFont;font-=step){if(await trial(snapshot,{...s,ecc:'H',fontSize:font})){candidate=font;break;}if(token!==revision)return;}if(candidate!==null){const safer=Math.max(minFont,Math.floor(candidate*.9));if(safer!==candidate&&await trial(snapshot,{...s,ecc:'H',fontSize:safer}))candidate=safer;setStatus('fail','已達最高容錯等級',`H 級仍不足以修正目前文字覆蓋範圍。建議字級改為 ${candidate} px，或減少中央文字。`,{ecc:'H',fontSize:candidate,text:`套用 H 級・${candidate} px`});}else setStatus('fail','已達最高容錯等級','H 級下仍無法讀取，請縮小或減少中央文字。');}catch(error){if(token===revision)setStatus('error','檢查未完成',error.message);}}
 for(const id of ['payload','label-text']){$(id).addEventListener('compositionstart',()=>{composing=true;clearTimeout(timer);revision++;lock();setStatus('waiting','等待輸入完成','選字完成並停止輸入 200 ms後檢查。');});$(id).addEventListener('compositionend',()=>{composing=false;update();});$(id).addEventListener('input',update);}function rememberScale(field){
@@ -2250,7 +2373,7 @@ function scaleFields(size){
  previousSize=size;
 }
 for(const [numberId,rangeId] of [['size','size-range'],['font-size','font-range'],['outline','outline-range']]){$(rangeId).addEventListener('input',()=>{$(numberId).value=$(rangeId).value;if(numberId==='size')scaleFields(Number($(numberId).value));else rememberScale(numberId);update();});$(numberId).addEventListener('input',()=>{const value=Number($(numberId).value);if(value>=Number($(numberId).min)&&value<=Number($(numberId).max)){$(rangeId).value=String(value);if(numberId==='size')scaleFields(value);else rememberScale(numberId);}update();});}$('ecc').addEventListener('input',()=>{manualEcc=$('ecc').value;autoReason='';update();});for(const id of ['text-color','hide-label','text-bold'])$(id).addEventListener('input',update);$('apply-suggestion').addEventListener('click',()=>{if(!suggestion)return;if(suggestion.ecc)$('ecc').value=suggestion.ecc;if(suggestion.fontSize){$('font-size').value=suggestion.fontSize;$('font-range').value=suggestion.fontSize;rememberScale('font-size');}update();});
-function resetStyle(){$('text-bold').checked=true;previousSize=400;fontRatio=50/400;outlineRatio=4/400;labelPosition={x:0,y:0};lastValidLabelPosition={x:0,y:0};$('size').value=$('size-range').value=400;$('font-size').value=$('font-range').value=50;$('outline').value=$('outline-range').value=4;$('font-size').max=$('font-range').max=120;$('outline').max=$('outline-range').max=8;manualEcc='L';autoReason='';$('ecc').value='L';$('text-color').value='#000000';$('hide-label').checked=false;}$('reset-style').addEventListener('click',()=>{resetStyle();update();});$('clear').addEventListener('click',()=>{$('payload').value='';$('label-text').value='';resetStyle();update();$('payload').focus();});
+function resetStyle(){$('text-bold').checked=true;previousSize=400;fontRatio=50/400;outlineRatio=4/400;labelPosition={x:0,y:0};lastValidLabelPosition={x:0,y:0};$('size').value=$('size-range').value=400;$('font-size').value=$('font-range').value=50;$('outline').value=$('outline-range').value=4;$('font-size').max=$('font-range').max=120;$('outline').max=$('outline-range').max=8;manualEcc='L';autoReason='';$('ecc').value='L';$('text-color').value='#000000';$('hide-label').checked=false;}$('reset-style').addEventListener('click',()=>{resetStyle();update();});$('clear').addEventListener('click',()=>{$('payload').value='';$('label-text').value='';resetStyle();update();$('payload').focus();});$('clear-label').addEventListener('click',()=>{$('label-text').value='';labelPosition={x:0,y:0};lastValidLabelPosition={x:0,y:0};update();$('label-text').focus();});
 function point(event){const canvas=$('preview'),rect=canvas.getBoundingClientRect(),ratio=current.result.outputSize/rect.width;return{x:(event.clientX-rect.left)*ratio,y:(event.clientY-rect.top)*ratio};}function inBounds(p,b){return b&&p.x>=b.left&&p.x<=b.left+b.width&&p.y>=b.top&&p.y<=b.top+b.height;}$('preview').addEventListener('pointerdown',event=>{if(!current?.result.labelBounds||!inBounds(point(event),current.result.labelBounds))return;const p=point(event);dragging={p,position:{...labelPosition}};clearTimeout(timer);revision++;lock();setStatus('waiting','調整文字位置中','放開滑鼠後檢查最終位置。');$('preview').setPointerCapture(event.pointerId);$('preview').classList.add('label-dragging');event.preventDefault();});$('preview').addEventListener('pointermove',event=>{if(!dragging||!current)return;const p=point(event);const anchor={x:dragging.position.x+p.x-dragging.p.x,y:dragging.position.y+p.y-dragging.p.y};const snapped=nearbyPositions(current.result,current.settings,anchor)[0];if(snapped)labelPosition={x:snapped.x,y:snapped.y};update();});function stopDrag(event){if(!dragging)return;dragging=null;$('preview').classList.remove('label-dragging');if($('preview').hasPointerCapture?.(event.pointerId))$('preview').releasePointerCapture(event.pointerId);update();}$('preview').addEventListener('pointerup',stopDrag);$('preview').addEventListener('pointercancel',stopDrag);
 function safeFilename(label,extension){let name=String(label||'').normalize('NFC').replace(/[<>:"/\\|?*\u0000-\u001f\u007f]/g,' ').replace(/\s+/g,' ').trim().replace(/[. ]+$/g,'');name=Array.from(name).slice(0,100).join('').replace(/[. ]+$/g,'');if(!name)name='QRCode';if(/^(CON|PRN|AUX|NUL|COM[1-9]|LPT[1-9])(?:\.|$)/i.test(name))name='_'+name;return `${name}.${extension}`;}
 function canvasInkRectangles(canvas){const {width,height}=canvas,image=canvas.getContext('2d').getImageData(0,0,width,height).data,rects=[];let active=new Map();const ink=(x,y)=>{const i=(y*width+x)*4;return image[i+3]>16&&(image[i]<245||image[i+1]<245||image[i+2]<245);};for(let y=0;y<height;y++){const runs=[];for(let x=0;x<width;){while(x<width&&!ink(x,y))x++;const start=x;while(x<width&&ink(x,y))x++;if(start<x)runs.push([start,x]);}const next=new Map();for(const [x0,x1] of runs){const key=`${x0}:${x1}`,rect=active.get(key)||{x:x0,y,width:x1-x0,height:0};rect.height++;next.set(key,rect);}for(const [key,rect] of active)if(!next.has(key))rects.push(rect);active=next;}rects.push(...active.values());return rects;}
