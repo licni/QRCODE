@@ -1121,8 +1121,8 @@ footer{display:flex;justify-content:space-between;gap:20px;border-top:1px solid 
     </div>
     <div class="setting">
       <label for="quiet">四周留白</label>
-      <select id="quiet"><option value="1">1 格</option><option value="2">2 格</option><option value="3">3 格</option><option value="4" selected>4 格（QR 規範建議）</option></select>
-      <p class="field-help">輸出尺寸＝本體＋兩側留白。留白不足時，手機可能找不到 QR。</p>
+      <select id="quiet"><option value="0" selected>細邊（約 2 px）</option><option value="1">1 格</option><option value="2">2 格</option><option value="3">3 格</option><option value="4">4 格（QR 規範建議）</option></select>
+      <p class="field-help">輸出尺寸＝本體＋兩側留白。預設只留細邊；若手機不易對焦，可改為 1–4 格。</p>
     </div>
   </section>
 </div>
@@ -1157,7 +1157,7 @@ footer{display:flex;justify-content:space-between;gap:20px;border-top:1px solid 
     <div class="label-body" id="label-body">
       <div class="field-head"><label for="label-text">文字內容</label><button type="button" class="small-button" id="clear-label">清空</button></div>
       <textarea id="label-text" rows="3" maxlength="120" placeholder="例如：施工位置" autocomplete="off"></textarea>
-      <div class="presets" role="group" aria-label="中央文字快捷選擇"><button type="button" data-label-preset="施工位置">施工位置</button><button type="button" data-label-preset="交接箱位置">交接箱位置</button></div>
+      <div class="presets" role="group" aria-label="中央文字快捷選擇"><button type="button" data-label-preset="施工位置">施工位置</button><button type="button" data-label-preset="位置">位置</button></div>
       <p class="field-help">接近可用邊界才換行，也可以自行換行。</p>
       <div class="divider"></div>
       <div class="setting">
@@ -1213,15 +1213,16 @@ function wrap(ctx,text,maxWidth){
 
 /**
  * Draws a QR code and its optional centre label.
- * settings: {size, ecc, quiet (modules), label, fontSize, outline, color, labelX, labelY}
+ * settings: {size, ecc, quiet (0 = thin border, 1–4 = modules), label, fontSize, outline, color, labelX, labelY}
  * size is the QR body only; the quiet zone is added on every side.
  */
 function render(QRCode,makeCanvas,payload,settings){
   const qr=QRCode.create(payload,{errorCorrectionLevel:settings.ecc});
   const n=qr.modules.size,size=settings.size;
   if(size<n)throw new Error(`目前內容至少需要 ${n} px 才能保留每個 QR 格子，請加大尺寸或縮短內容。`);
-  const quietModules=Number.isFinite(settings.quiet)?settings.quiet:4;
-  const quiet=Math.round(quietModules*size/n),outputSize=size+quiet*2,moduleSize=size/n;
+  // quiet 0 = thin border (2 px, or 0.5% of the size when larger); 1–4 = that many modules.
+  const quietModules=Number.isFinite(settings.quiet)?settings.quiet:0;
+  const quiet=quietModules>0?Math.round(quietModules*size/n):Math.max(2,Math.round(size*.005)),outputSize=size+quiet*2,moduleSize=size/n;
   const edge=i=>quiet+Math.round(i*size/n);
   const cell=(x,y)=>({left:edge(x),top:edge(y),width:edge(x+1)-edge(x),height:edge(y+1)-edge(y)});
 
@@ -1302,7 +1303,7 @@ const BYTE_CAPACITY={
 // Worksheet mode: fixed 120 px, L level, no label. Pixels per module decide the verdict.
 const WORKSHEET={size:120,ecc:'L',passPx:3.5,warnPx:2.9};
 const SIZE_LIMIT={min:100,max:1000};
-const DEFAULTS={size:400,ecc:'L',quiet:4,worksheetQuiet:1,fontSize:50,outline:4,color:'#000000'};
+const DEFAULTS={size:400,ecc:'L',quiet:0,worksheetQuiet:0,fontSize:50,outline:4,color:'#000000'};
 const DECODE_MAX=500;      // decoding always runs on a copy no larger than this
 const CHECK_DELAY=200;     // ms after the last input
 const MARGIN_TARGET=2;     // label must survive a 2 × 2 module wipe on every side
@@ -1345,7 +1346,7 @@ function config(){
 }
 function validSettings(s){
   const sizeOk=Number.isInteger(s.size)&&s.size>=SIZE_LIMIT.min&&s.size<=SIZE_LIMIT.max;
-  const quietOk=Number.isInteger(s.quiet)&&s.quiet>=1&&s.quiet<=4;
+  const quietOk=Number.isInteger(s.quiet)&&s.quiet>=0&&s.quiet<=4;
   if(!sizeOk||!quietOk)return false;
   if(!hasLabel(s))return true;
   return Number.isFinite(s.fontSize)&&s.fontSize>=8&&s.fontSize<=fontMax(s.size)&&Number.isFinite(s.outline)&&s.outline>=.5&&s.outline<=outlineMax(s.size);
